@@ -1,4 +1,4 @@
-export const sources = [
+module.exports.sources = [
     { id: "01", name: "SRC01" }, 
     { id: "02", name: "SRC02" }, 
     { id: "03", name: "SRC03" }, 

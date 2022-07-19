@@ -1,4 +1,4 @@
-export const tickers = {
+module.exports.tickers = {
     "SRC01":
         [
             { id: "T11", name: "SRC01-T01" },
