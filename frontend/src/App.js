@@ -1,22 +1,28 @@
 import logo from './logo.svg';
+import { useState, useEffect, useRef } from 'react';
+import socketIOClient from "socket.io-client";
 import './App.css';
 
 function App() {
+  const URL = 'ws://localhost:8000';
+
+  useEffect(() => {
+    const socket = socketIOClient(URL);
+    socket.on("stock price", data => {
+      console.log(data);
+    });
+    return () => {
+      socket.disconnect()
+    }
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Stock Ticker
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
