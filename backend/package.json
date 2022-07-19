@@ -1,0 +1,17 @@
+{
+  "name": "stock-ticker",
+  "version": "1.0.0",
+  "description": "backend application to display stock prices",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch",
+    "start": "nodemon app.js"
+  },
+  "author": "swaroop325",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
