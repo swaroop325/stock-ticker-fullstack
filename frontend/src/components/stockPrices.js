@@ -90,7 +90,7 @@ export default function StockPrices() {
                 </select>
             </div>
             <div>
-                {prices.length !== 0 && <StockPricesTable prices={prices} updatePriceList={updatePriceList} />}
+                {prices.length !== 0 && <StockPricesTable prices={prices} updatePriceList={updatePriceList} data-testid="stock-table"/>}
             </div>
         </div>
     )

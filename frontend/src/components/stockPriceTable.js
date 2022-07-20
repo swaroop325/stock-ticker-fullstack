@@ -9,7 +9,7 @@ export default function StockPricesTable({ prices }) {
             </thead>
             <tbody>
                 {prices.map((item, index) =>
-                    <tr key={index}>
+                    <tr key={index} data-testid="price-row">
                         <td>{item.timeStamp}</td>
                         <td>{item.stockprice}</td>
                     </tr>
