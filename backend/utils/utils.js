@@ -20,7 +20,16 @@ function generateLastFivePrices() {
     return lastFivePrices
 }
 
+function generateCurrentStockPrice() {
+    let currentStockPrice = {
+        timeStamp: generateTimeStamp(),
+        stockprice: generateStockPrice()
+    }
+    return currentStockPrice
+}
+
 module.exports = {
+    generateCurrentStockPrice,
     generateLastFivePrices,
     generateStockPrice,
     generateTimeStamp

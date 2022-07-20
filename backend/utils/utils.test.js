@@ -1,4 +1,4 @@
-const { generateStockPrice, generateTimeStamp, generateLastFivePrices } = require("./utils")
+const { generateStockPrice, generateTimeStamp, generateLastFivePrices, generateCurrentStockPrice } = require("./utils")
 
 describe("testing utility functions", () => {
     it("testing generateStockPrice function", () => {
@@ -24,6 +24,14 @@ describe("testing utility functions", () => {
                 { "stockprice": 123.46, "timeStamp": "2022-07-19 10:10:37" },
                 { "stockprice": 123.46, "timeStamp": "2022-07-19 10:10:32" }
             ]
+        );
+    })
+
+    it("testing currentStockPrice function", () => {
+        Date.now = jest.fn(() => 1658225452018);
+        let currentPrice = generateCurrentStockPrice();
+        expect(currentPrice).toStrictEqual(
+            {"stockprice": 123.46, "timeStamp": "2022-07-19 10:10:47"}
         );
     })
 })
