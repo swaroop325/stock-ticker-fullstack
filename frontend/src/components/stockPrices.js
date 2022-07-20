@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import StockPricesTable from "./stockPriceTable";
 import socketIOClient from "socket.io-client";
+import apiCall from "../api";
+import { BASE_URL, WEBSOCKET_URL } from "../constants";
 
 export default function StockPrices() {
     const [sources, setSources] = useState([]);
@@ -8,8 +10,6 @@ export default function StockPrices() {
     const [selectedSource, setSelectedSource] = useState('null');
     const [selectedTicker, setSelectedTicker] = useState('null');
     const [prices, setPrices] = useState([])
-
-    const URL = 'ws://localhost:8000';
 
     useEffect(() => {
         getSources();
@@ -31,33 +31,9 @@ export default function StockPrices() {
         }
     }, [selectedTicker])
 
-    const getSources = () => {
-        fetch('http://localhost:8000/sources').then(res => res.json()).then(data => {
-            setSources(data)
-        })
-    }
-
-    const getTickers = () => {
-        fetch(`http://localhost:8000/${selectedSource}/prices`).then(res => res.json()).then(data => {
-            setTicker(data)
-        })
-    }
-
-    const getStockPrices = () => {
-        fetch(`http://localhost:8000/stockPrices`).then(res => res.json()).then(data => {
-            setPrices(data)
-        })
-    }
-
-    const updatePriceList = (newPrice) => {
-        let lastUpdatedPrice = prices;
-        lastUpdatedPrice.push(newPrice);
-        setPrices(price => [newPrice, ...price.slice(0, 4)]);
-    }
-
     useEffect(() => {
         if (prices.length !== 0) {
-            const socket = socketIOClient(URL);
+            const socket = socketIOClient(WEBSOCKET_URL);
             socket.on("stock price", data => {
                 updatePriceList(data);
             });
@@ -66,6 +42,28 @@ export default function StockPrices() {
             }
         }
     });
+
+    const getSources = () => {
+        apiCall(BASE_URL + `sources`).then(sourcesData => {
+            setSources(sourcesData)
+        })
+    }
+
+    const getTickers = () => {
+        apiCall(BASE_URL + selectedSource + `/tickers`).then(tickersData => {
+            setTicker(tickersData)
+        })
+    }
+
+    const getStockPrices = () => {
+        apiCall(BASE_URL + `stockPrices`).then(stockprices => setPrices(stockprices))
+    }
+
+    const updatePriceList = (newPrice) => {
+        let lastUpdatedPrice = prices;
+        lastUpdatedPrice.push(newPrice);
+        setPrices(price => [newPrice, ...price.slice(0, 4)]);
+    }
 
     return (
         <div>

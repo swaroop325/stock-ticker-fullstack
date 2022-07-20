@@ -8,7 +8,7 @@ getRoutes.get('/sources', (req, res) => {
     res.status(200).json(sources)
 })
 
-getRoutes.get('/:sourceId/prices', (req, res) => {
+getRoutes.get('/:sourceId/tickers', (req, res) => {
     let sourceId = req.params.sourceId
     if (sourceId) {
         let prices = tickers[sourceId]
