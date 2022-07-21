@@ -71,22 +71,22 @@ export default function StockPrices() {
                 <span>
                     <label>Price Source:</label>
                 </span>
-                <select value={selectedSource} onChange={(item) => setSelectedSource(item.target.value)}>
+                <select value={selectedSource} data-testid='source-select' onChange={(item) => setSelectedSource(item.target.value)}>
                     <option value="null" disabled hidden>
                         Choose price source
                     </option>
-                    {sources.map((item, index) => (<option value={item.name}>{item.name}</option>))}
+                    {sources.map((item, index) => (<option key={index} value={item.name}>{item.name}</option>))}
                 </select>
             </div>
             <div className="select-box">
                 <span>
                     <label>Ticker:</label>
                 </span>
-                <select value={selectedTicker} onChange={(item) => setSelectedTicker(item.target.value)}>
+                <select value={selectedTicker} data-testid='ticker-select' onChange={(item) => setSelectedTicker(item.target.value)}>
                     <option value="null" disabled hidden>
                         Choose ticker
                     </option>
-                    {ticker.map((item, index) => (<option value={item.name}>{item.name}</option>))}
+                    {ticker.map((item, index) => (<option key={index} value={item.name}>{item.name}</option>))}
                 </select>
             </div>
             <div>

@@ -3,29 +3,19 @@ import renderer from "react-test-renderer";
 import StockPricesTable from '../components/stockPriceTable';
 
 test("Renders the StockPricesTable page perfectly without data", () => {
-    render(<StockPricesTable prices={[]}/>);
+    render(<StockPricesTable prices={[]} />);
     expect(screen.getByText("Time")).toBeInTheDocument();
     expect(screen.getByText("Prices")).toBeInTheDocument();
     const dataRows = screen.queryAllByTestId("price-row")
-    expect(dataRows).toHaveLength(0) 
+    expect(dataRows).toHaveLength(0)
 })
 
 test("Renders the StockPricesTable page with data", () => {
-    render(<StockPricesTable prices={[{ "stockprice": 123.46, "timeStamp": "2022-07-19 10:10:52" }]}/>);
+    render(<StockPricesTable prices={[{ "stockprice": 123.46, "timeStamp": "2022-07-19 10:10:52" }]} />);
     expect(screen.getByText("Time")).toBeInTheDocument();
     expect(screen.getByText("Prices")).toBeInTheDocument();
     expect(screen.getByText("2022-07-19 10:10:52")).toBeInTheDocument();
     expect(screen.getByText("123.46")).toBeInTheDocument();
     const dataRows = screen.queryAllByTestId("price-row")
-    expect(dataRows).toHaveLength(1) 
-})
-
-test("snapshot testing", () => {
-    const domTree = renderer.create(<StockPricesTable prices={[]}/>).toJSON();
-    expect(domTree).toMatchSnapshot();
-})
-
-test("snapshot testing with data", () => {
-    const domTree = renderer.create(<StockPricesTable prices={[{ "stockprice": 123.46, "timeStamp": "2022-07-19 10:10:52" }]}/>).toJSON();
-    expect(domTree).toMatchSnapshot();
+    expect(dataRows).toHaveLength(1)
 })
